@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Folklore Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Folklore Map</h1>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([-6.615865, 110.651867], 10);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var folkloreLocations = [
+            {lat: -6.615865, lon: 110.651867, name: 'Perang Obor', description: 'Tradisi ini merupakan atraksi budaya yang sudah ada sejak lama.'},
+            {lat: -7.000000, lon: 110.719704, name: 'Baratan', description: 'Tradisi ini merupakan pesta lampion untuk menyambut bulan Ramadhan.'},
+            {lat: -6.464877, lon: 110.893478, name: 'Jembul Tulakan', description: 'Tradisi ini merupakan upacara sedekah bumi dan penghormatan kepada leluhur.'},
+            {lat: -6.536332, lon: 110.860926, name: 'Air Terjun Songgo Langit', description: 'Legenda yang paling terkenal berkisah tentang sepasang suami istri yang menaiki pedati di tengah malam.'}
+        ];
+
+        folkloreLocations.forEach(function(loc) {
+            var popupContent = '<b>' + loc.name + '</b><br>' + loc.description + '<br><a href="deskripsi_' + loc.name.toLowerCase().replace(/ /g, '_') + '.html">Baca selengkapnya</a>';
+            L.marker([loc.lat, loc.lon]).addTo(map)
+                .bindPopup(popupContent);
+        });
+    </script>
+</body>
+</html>
